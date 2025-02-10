@@ -1,25 +1,35 @@
 # coded by Loukrichi Fouad
 
+# Encryption formula
+## get the asci value for the text
+## get the ascii value for the key 
+## encryption formula ((text ascii value + key char ascii value) % 256) 
+## after you get the number 
+
+# Decryption formula
+# (encrypted_char - key_char + 256) % 256
+
+
 def vigenere_encrypt(text, key):
     encrypted_text = ""
     key_index = 0
     key = key.upper()
     
-    # Loop through every character in the text
+  
     for char in text:
-        if char.isalpha() or char.isdigit() or not char.isalnum():  # Include letters, digits, and symbols
-            char_value = ord(char)  # Get ASCII value of character
-            key_char = key[key_index % len(key)]  # Repeat key if shorter than text
-            key_value = ord(key_char)  # Get ASCII value of key character
+        if char.isalpha() or char.isdigit() or not char.isalnum():  
+            char_value = ord(char) 
+            key_char = key[key_index % len(key)] 
+            key_value = ord(key_char) 
 
-            # Encrypt the character by shifting its ASCII value
-            encrypted_char_value = (char_value + key_value) % 256  # Mod 256 for all ASCII characters
-            encrypted_char = chr(encrypted_char_value)  # Convert back to character
+            
+            encrypted_char_value = (char_value + key_value) % 256  
+            encrypted_char = chr(encrypted_char_value)  
             
             encrypted_text += encrypted_char
-            key_index += 1  # Move to the next character in the key
+            key_index += 1 
         else:
-            encrypted_text += char  # Non-alphabetic characters remain unchanged
+            encrypted_text += char  
 
     return encrypted_text
 
@@ -29,34 +39,33 @@ def vigenere_decrypt(text, key):
     key_index = 0
     key = key.upper()
     
-    # Loop through every character in the text
+  
     for char in text:
-        if char.isalpha() or char.isdigit() or not char.isalnum():  # Include letters, digits, and symbols
-            char_value = ord(char)  # Get ASCII value of character
-            key_char = key[key_index % len(key)]  # Repeat key if shorter than text
-            key_value = ord(key_char)  # Get ASCII value of key character
+        if char.isalpha() or char.isdigit() or not char.isalnum(): 
+            char_value = ord(char)  
+            key_char = key[key_index % len(key)]  
+            key_value = ord(key_char)  
 
-            # Decrypt the character by shifting its ASCII value
-            decrypted_char_value = (char_value - key_value + 256) % 256  # Mod 256 for all ASCII characters
-            decrypted_char = chr(decrypted_char_value)  # Convert back to character
+           
+            decrypted_char_value = (char_value - key_value + 256) % 256 
+            decrypted_char = chr(decrypted_char_value)  
             
             decrypted_text += decrypted_char
-            key_index += 1  # Move to the next character in the key
+            key_index += 1 
         else:
-            decrypted_text += char  # Non-alphabetic characters remain unchanged
+            decrypted_text += char  
 
     return decrypted_text
 
 
 
-# Input text and key
 initial_text = input("Enter the text to encrypt: ")
 key = input("Enter the key: ")
 
-# Encrypt the text
+
 encrypted_text = vigenere_encrypt(initial_text, key)
 print("Encrypted Text:", encrypted_text)
 
-# Decrypt the text
+
 decrypted_text = vigenere_decrypt(encrypted_text, key)
 print("Decrypted Text:", decrypted_text)
